@@ -5,13 +5,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnButtonClickLIstener{
 
     RecyclerView recyclerView;
     Button btn1, btn2, btn3, btn4;
@@ -51,11 +51,33 @@ public class MainActivity extends AppCompatActivity {
         list.add(new TextViewModel("Item19"));
         list.add(new TextViewModel("Item20"));
 
-        TextViewAdapter adapter = new TextViewAdapter(list, this);
+        TextViewAdapter adapter = new TextViewAdapter(list, this, this);
         recyclerView.setAdapter(adapter);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
     }
+
+    @Override
+    public void onClicked(TextViewModel list, int a) {
+        Log.d("demo"," - 1");
+
+        switch (a){
+            case 1:
+                Toast.makeText(MainActivity.this, "Button 1 " + list.getText(),Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(MainActivity.this, "Button 2 " + list.getText(),Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                Toast.makeText(MainActivity.this, "Button 3 " + list.getText(),Toast.LENGTH_SHORT).show();
+                break;
+            case 4:
+                Toast.makeText(MainActivity.this, "Button 4 " + list.getText(),Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                throw new RuntimeException("Unknow button ID");
+        }
+        }
 }
